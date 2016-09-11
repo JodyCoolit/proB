@@ -59,6 +59,9 @@ public class Simulation {
 			case WAITING_ENTRY:
 				t.waitingEntry();
 				break;
+			case PASSING_BY:
+				t.passingBy();
+				break;
 			}
 		}
 	}

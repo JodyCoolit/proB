@@ -26,7 +26,7 @@
 			<max_passengers> 100 </max_passengers>
 		</station>
 		<station>
-			<type>Active</type>
+			<type>ShortPlatform</type>
 			<name>Rosanna</name>
 			<x_loc>4400</x_loc>
 			<y_loc>6780</y_loc>

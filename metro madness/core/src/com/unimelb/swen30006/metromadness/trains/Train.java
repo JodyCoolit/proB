@@ -15,7 +15,7 @@ public class Train{
 
 	// The state that a train can be in 
 	public enum State {
-		IN_STATION, READY_DEPART, ON_ROUTE, WAITING_ENTRY, FROM_DEPOT
+		IN_STATION, READY_DEPART, ON_ROUTE, WAITING_ENTRY, FROM_DEPOT,PASSING_BY
 	}
 
 	// Constants
@@ -210,7 +210,36 @@ public class Train{
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void passingBy(){
+		System.out.println("passing by");
+		this.track.leave(this);
+		this.pos = (Point2D.Float) this.station.position.clone();
+		boolean endOfLine;
+		try {
+			endOfLine = this.trainLine.endOfLine(this.station);
+			if(endOfLine){
+				this.forward = !this.forward;
+			}
+				this.track = this.trainLine.nextTrack(this.station, this.forward);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(this.track.canEnter(this.forward)){
+			try {
+				// Find the next
+				Station next = this.trainLine.nextStation(this.station, this.forward);
+				// Depart our current station
+				this.station = next;
+			} catch (Exception e) {
+//				e.printStackTrace();
+			}
+			this.track.enter(this);
+			this.state = State.ON_ROUTE;
+		}
+		System.out.println("end passing");
+	}
 
 	
 	
