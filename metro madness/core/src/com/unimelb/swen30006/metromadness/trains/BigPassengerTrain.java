@@ -9,13 +9,12 @@ import com.unimelb.swen30006.metromadness.tracks.Line;
 import com.unimelb.swen30006.metromadness.trains.Train.State;
 
 public class BigPassengerTrain extends Train {
-	
-	public final int size = 80;
 
-	public BigPassengerTrain(Line trainLine, Station start, boolean forward) {
-		super(trainLine, start, forward);
+	public BigPassengerTrain(Line trainLine, Station start, boolean forward,int size) {
+		super(trainLine, start, forward,size);
 	}
 	
+	@Override
 	public void onRoute(float delta) {
 		// Checkout if we have reached the new station
 		try {

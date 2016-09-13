@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.unimelb.swen30006.metromadness.passengers.Passenger;
@@ -26,7 +27,7 @@ public class Train{
 	public static final float TRAIN_LENGTH = 6;
 	public static final float TRAIN_SPEED=50f;
 
-	public final int size = 40;
+	public int size;
 	
 	// The line that this is traveling on
 	public Line trainLine;
@@ -49,16 +50,43 @@ public class Train{
 	public boolean disembarked;
 
 	
-	public Train(Line trainLine, Station start, boolean forward){
+	public Train(Line trainLine, Station start, boolean forward, int size){
 		this.trainLine = trainLine;
 		this.station = start;
 		this.state = State.FROM_DEPOT;
 		this.forward = forward;
 		this.passengers = new ArrayList<Passenger>();
+		this.size = size;
 	}
 	
 
-	public void update(float delta){
+	public void update(float delta){	
+		// Update all passengers
+		for(Passenger p: this.passengers){
+			p.update(Gdx.graphics.getDeltaTime());
+		}
+		// Update the state
+		switch(this.state) {
+		case FROM_DEPOT:
+			this.fromDepot();
+			break;
+		case IN_STATION:
+			this.inStation(Gdx.graphics.getDeltaTime());
+			break;
+		case READY_DEPART:
+			this.readyDepart();
+			break;
+		case ON_ROUTE:
+			this.onRoute(Gdx.graphics.getDeltaTime());
+			break;
+		case WAITING_ENTRY:
+			this.waitingEntry();
+			break;
+		case PASSING_BY:
+			this.passingBy();
+			break;
+		}
+		
 	}
 
 	public void move(float delta){
