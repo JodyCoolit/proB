@@ -19,31 +19,22 @@ public class Station {
 	public static final int NUM_CIRCLE_STATMENTS=100;
 	public static final int MAX_LINES=3;
 	public String name;
-	public ArrayList<Line> lines;
 	public ArrayList<Train> trains;
 	public static final float DEPARTURE_TIME = 2;
 	public PassengerRouter router;
+	private float radius = RADIUS;
 
 	public Station(float x, float y, PassengerRouter router, String name){
 		this.name = name;
 		this.router = router;
 		this.position = new Point2D.Float(x,y);
-		this.lines = new ArrayList<Line>();
 		this.trains = new ArrayList<Train>();
 	}
 	
-	public void registerLine(Line l){
-		this.lines.add(l);
-	}
-	
-	public void render(ShapeRenderer renderer){
-		float radius = RADIUS;
-		for(int i=0; (i<this.lines.size() && i<MAX_LINES); i++){
-			Line l = this.lines.get(i);
-			renderer.setColor(l.lineColour);
-			renderer.circle(this.position.x, this.position.y, radius, NUM_CIRCLE_STATMENTS);
-			radius = radius - 1;
-		}
+	public void render(ShapeRenderer renderer, Color colour){
+		renderer.setColor(colour);
+		renderer.circle(this.position.x, this.position.y, radius, NUM_CIRCLE_STATMENTS);
+		this.radius = this.radius - 1;
 		
 		// Calculate the percentage
 		float t = this.trains.size()/(float)PLATFORMS;
@@ -69,7 +60,7 @@ public class Station {
 		}
 	}
 	
-	public boolean canEnter(Train t) throws Exception {
+	public boolean canEnter(Line l) throws Exception {
 		return trains.size() < PLATFORMS;
 	}
 
@@ -88,9 +79,11 @@ public class Station {
 				+ ", router=" + router + "]";
 	}
 
+	/*
 	public Passenger generatePassenger(Station s) {
 		return new Passenger(this, s);
 	}
+	*/
 	
 	
 }

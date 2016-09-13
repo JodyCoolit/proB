@@ -1,10 +1,10 @@
+
 package com.unimelb.swen30006.metromadness;
 
 import java.util.ArrayList;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.unimelb.swen30006.metromadness.passengers.Passenger;
 import com.unimelb.swen30006.metromadness.stations.Station;
 import com.unimelb.swen30006.metromadness.tracks.Line;
 import com.unimelb.swen30006.metromadness.trains.Train;
@@ -23,10 +23,6 @@ public class Simulation {
 		// Create a list of lines
 		this.lines = new ArrayList<Line>();
 		this.lines.addAll(m.getLines());
-				
-		// Create a list of stations
-		this.stations = new ArrayList<Station>();
-		this.stations.addAll(m.getStations());
 		
 		// Create a list of trains
 		this.trains = new ArrayList<Train>();
@@ -36,6 +32,7 @@ public class Simulation {
 	
 	// Update all the trains in the simulation
 	public void update(){
+		// Update all the trains
 		for(Train t: this.trains){
 			t.update(Gdx.graphics.getDeltaTime());
 		}
@@ -48,9 +45,6 @@ public class Simulation {
 
 		for(Train t: this.trains){
 			t.render(renderer);
-		}
-		for(Station s: this.stations){
-			s.render(renderer);
 		}
 	}
 }

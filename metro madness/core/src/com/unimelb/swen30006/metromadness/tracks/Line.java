@@ -49,7 +49,6 @@ public class Line {
 		}
 		
 		// Add the station
-		s.registerLine(this);
 		this.stations.add(s);
 	}
 	
@@ -113,6 +112,10 @@ public class Line {
 		for(Track t: this.tracks){
 			t.render(renderer);
 		}	
+		
+		for (Station s: this.stations){
+			s.render(renderer, lineColour);
+		}
 	}
 	
 }
