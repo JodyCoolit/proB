@@ -34,7 +34,31 @@ public class Simulation {
 	public void update(){
 		// Update all the trains
 		for(Train t: this.trains){
-			t.update(Gdx.graphics.getDeltaTime());
+			// Update all passengers
+			for(Passenger p: t.passengers){
+				p.update(Gdx.graphics.getDeltaTime());
+			}
+			// Update the state
+			switch(t.state) {
+			case FROM_DEPOT:
+				t.fromDepot();
+				break;
+			case IN_STATION:
+				t.inStation(Gdx.graphics.getDeltaTime());
+				break;
+			case READY_DEPART:
+				t.readyDepart();
+				break;
+			case ON_ROUTE:
+				t.onRoute(Gdx.graphics.getDeltaTime());
+				break;
+			case WAITING_ENTRY:
+				t.waitingEntry();
+				break;
+			case PASSING_BY:
+				t.passingBy();
+				break;
+			}
 		}
 	}
 	

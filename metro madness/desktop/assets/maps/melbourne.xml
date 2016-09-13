@@ -962,21 +962,18 @@
 			<line>Hurstbridge</line>
 			<start>Rosanna</start>
 			<direction>forward</direction>
-			<size>80</size>
 		</train>
 		<train>
 			<type>BigPassenger</type>
 			<line>Belgrave</line>
 			<start>Camberwell</start>
 			<direction>forward</direction>
-			<size>80</size>
 		</train>
 		<train>
 			<type>SmallPassenger</type>
 			<line>Belgrave</line>
 			<start>Camberwell</start>
 			<direction>forward</direction>
-			<size>10</size>
 		</train>
 		
 	</trains>

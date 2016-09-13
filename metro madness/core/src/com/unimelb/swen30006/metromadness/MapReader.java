@@ -101,11 +101,7 @@ public class MapReader {
 		String line = e.get("line");
 		String start = e.get("start");
 		boolean dir = e.getBoolean("direction");
-		
-		int size = Integer.parseInt(e.get("size"));
 
-		System.out.println(size);	
-		
 		// Retrieve the lines and stations
 		Line l = this.lines.get(line);
 		Station s = this.stations.get(start);
@@ -113,13 +109,13 @@ public class MapReader {
 		// Make the train
 		if(type.equals("BigPassenger")){
 			System.out.println("Big");
-			return new BigPassengerTrain(l,s,dir,size);
+			return new BigPassengerTrain(l,s,dir);
 		} else if (type.equals("SmallPassenger")){
 			System.out.println("Small");
-			return new SmallPassengerTrain(l,s,dir,size);
+			return new SmallPassengerTrain(l,s,dir);
 		} else {
 			System.out.println("Normal");
-			return new Train(l, s, dir,size);
+			return new Train(l, s, dir);
 		}
 	}
 
